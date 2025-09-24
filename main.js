@@ -1,8 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from "cors"
 
 dotenv.config();
 const app = express();
+app.use(cors())
 const PORT = 3000;
 const API_KEY = process.env.TMDB_API_KEY;
 const BASE_URL = 'https://api.themoviedb.org/3';
