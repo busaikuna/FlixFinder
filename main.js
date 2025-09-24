@@ -37,6 +37,22 @@ app.get('/filme/:nome', async (req, res) => {
   }
 });
 
+app.get('/ping', (req, res) => {
+  res.send('pong');
+});
+
 app.listen(PORT, () => {
   console.log(`API rodando em http://localhost:${PORT}`);
-});
+
+  const selfPingUrl = `https://flixfinder-pdhb.onrender.com/ping`;
+
+  setInterval(async () => {
+    try {
+      const res = await fetch(selfPingUrl);
+      const text = await res.text();
+      console.log(`[Auto-ping]: ${text}`);
+    } catch (err) {
+      console.error('[Auto-ping erro]:', err.message);
+    }
+  }, 240000);
+})
